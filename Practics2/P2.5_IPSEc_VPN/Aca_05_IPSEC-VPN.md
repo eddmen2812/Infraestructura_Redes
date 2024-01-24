@@ -1,5 +1,14 @@
 ## Configuración de IPSEC | VPN
 Una Red Privada Virtual VPN (Virtual Private Network): es la tecnolog ́ıa que habilita el transporte de datos de manera segura entre dispositivos de una red privada a trav ́es de un medio p ́ublico como Internet.
+
+IPSec
+
+![Alt text](image.png)
+
+VPN
+
+![Alt text](image-1.png)
+
 #### Configuración de VPN
     #R-LAN
     aaa new-model
