@@ -1,3 +1,5 @@
+
+# Proyecto ejemplar relacionado al mundo real
 ## Descripción Del Cliente Final  
 * La Universidad Técnica Juan León Mera, en adelante UTJLM, es una universidad 
 ubicada en el cantón Ambato.  
@@ -55,3 +57,19 @@ con el recurso humano técnico calificado, por lo cual demandan una solución es
 tolerante a fallas y con facilidades de administración y mantenimiento.  
 * Cualquier elección realizada debe estar alineada al 100% con los requerimientos de la 
 UTJP
+
+## Contenido del proyecto; Para ver todo, ve a la Carpeta:  **Prácticas 3**
+* Redes de computadores 
+* Modelo OSI 
+* Modelo TCP/IP 
+* Encapsulación y desencapsulación 
+* Protocolos y estándares capa aplicación 
+* Protocolos y estándares capa transporte 
+* Protocolos y estándares capa internet 
+* Protocolos y estándares capa acceso a red. 
+* Capacidad del canal de comunicación 
+* Medios de transmisión de datos  
+* Medios guiados y medios no guiados 
+* Medio inalámbrico 
+![](/image.png)
+### Para ver más detallada la Imagen, ve a la carpeta **P3.02_Laboratorio**
