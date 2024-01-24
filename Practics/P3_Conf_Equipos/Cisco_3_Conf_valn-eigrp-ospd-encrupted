@@ -1,0 +1,169 @@
+## Configuración de Vlan | EIGRP | OSPF | ENCRYPTED
+![Alt text](image.png)
+
+    R1
+    enable
+    configure terminal
+    hostname R1
+    no ip domain-lookup
+    interface g0/0/0
+    ip address 192.168.1.1 255.255.255.0
+    description LAN-1
+    no shutdown
+    exit
+    interface g0/0/1
+    ip address 192.168.2.1 255.255.255.0
+    description LAN-2
+    no shutdown
+    exit
+    interface g0/0/2
+    ip address 10.10.10.1 255.255.255.0
+    description ENLACE-R1-R2
+    no shutdown
+    exit
+
+    #show ip interface brief
+    #show ip interface G0/0/0
+    #show interface g0/0/0
+    #show ip arp = show arp
+    #show running-config = show run
+    #show ip route
+    ping
+    ipconfig
+    arp -a
+---
+    SW1
+    enable
+    configure terminal
+    hostname SW1
+    no ip domain-lookup
+    interface vlan 1
+    ip address 192.168.1.2 255.255.255.0
+    no shutdown
+    ip default-gateway 192.168.1.1
+    exit
+---
+    SW2
+    enable
+    configure terminal
+    hostname SW2
+    interface vlan 1
+    ip address 192.168.2.2 255.255.255.0
+    no shut
+    ip default-gateway 192.168.2.1
+    #show mac address-table
+    #show ip interface brief
+    #show interface g0/0/0
+    #show ip arp = show arp
+    #show running-config = show run
+### Comprobanción Conexión
+![Alt text](image-1.png)
+---
+    R2
+    enable
+    configure terminal
+    hostname R2
+    no ip domain-lookup
+    interface g0/0/0
+    ip address 172.16.1.1 255.255.255.0
+    description LAN-3
+    no shutdown
+    exit
+    interface g0/0/2
+    ip address 10.10.10.2 255.255.255.0
+    description ENLACE-R2-R1
+    no shutdown
+    exit
+---
+    SW3
+    enable
+    configure terminal
+    hostname SW3
+    interface vlan 1
+    ip address 172.16.1.2 255.255.255.0
+    description ADMIN-SWITCH
+    no shutdown
+---
+    #Aplicar solo cuando la configuracion este finalizada
+    #copy run start
+    #write
+---
+    Router-PC
+    #show ip interface brief
+    #show ip interface G0/0/0
+    #show interface g0/0/0
+    #show ip arp = show arp
+    #show running-config = show run
+    #show ip route
+    ping
+    ipconfig
+    arp -a
+---
+    Switch
+    #show mac address-table
+    #show ip interface brief
+    #show interface g0/0/0
+    #show ip arp = show arp
+    #show running-config = show run
+---
+## Interconectar redes
+### Configuración EIGRP
+    R1-R2
+    * Nota:Para conectar las redes locales
+    * Nota: Verificar conectividad en cada subred
+    1 opcion
+    router eigrp 1
+    network 0.0.0.0
+    no auto
+---
+### Configuración OSPF
+    2 opcion
+    router ospf 1
+    network 0.0.0.0 255.255.255.255 area 0
+---
+### Configuración Default
+    3 opcion
+    R1
+    ip route 0.0.0.0 0.0.0.0 10.10.10.2
+
+    R2
+    ip route 0.0.0.0 0.0.0.0 10.10.10.1
+![Alt text](image-2.png)
+---
+    SSH-SW1
+    ip domain-name netacad.com
+    crypto key generate rsa  general-key modulus 2000
+    !crypto key zeroire rsa
+    username cisco privilege 15 secret cisco
+    username paul privilege  15 secret paul
+    !enable secret cisco
+    banner motd !SOLO PERSONAl CON ACCESO!
+    line vty 0 4
+    login local
+    exec-timeout 5 5
+    !transport input ssh
+    exit
+    line console 0
+    password cisco
+    login
+    exec-timeout 5 5
+    exit
+    service password-encryption
+---
+    PC
+    ssh -l cisco 192.168.1.2
+---
+
+    TELNET - SW2
+    service password-encryption
+    enable secret cisco
+    banner motd !SOLO PERSONAl CON ACCESO!
+    line vty 0 4
+    password cisco
+    exec-timeout 5 5
+    login
+    line console 0
+    password cisco
+    exec-timeout 5 5
+    login
+    exit
